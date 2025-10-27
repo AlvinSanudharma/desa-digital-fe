@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import numeral from "numeral";
 
 export function formatRupiah(value) {
@@ -28,4 +29,19 @@ export function formatDateTime(date) {
   };
 
   return new Date(date).toLocaleDateString("id-ID", options);
+}
+
+export function formatToClientTimezone(date) {
+  const originalDate = DateTime.fromISO(date, { zone: "utc" });
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  return originalDate
+    .setZone(timezone)
+    .setLocale("id")
+    .toFormat("dd LLLL yyyy, HH:mm");
+}
+
+export function ucfirst(string) {
+  return string ? string.chartAt(0).toUpperCase() + string.slice(1) : "";
 }
