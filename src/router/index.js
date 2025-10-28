@@ -1,4 +1,4 @@
-import HomeView from "@/views/HomeView.vue";
+import Dashboard from "@/views/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -6,8 +6,8 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomeView,
+      name: "dashboard",
+      component: Dashboard,
     },
   ],
 });
