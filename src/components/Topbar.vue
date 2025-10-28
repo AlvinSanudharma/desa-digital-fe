@@ -31,7 +31,7 @@
         class="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-desa-background hover:border-desa-secondary transition-setup"
       >
         <img
-          src="@assets/images/icons/notification-secondary-green.svg"
+          src="@/assets/images/icons/notification-secondary-green.svg"
           class="size-6"
           alt="icon"
         />
@@ -41,7 +41,7 @@
         class="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-desa-background hover:border-desa-secondary transition-setup"
       >
         <img
-          src="@assets/images/icons/setting-2-secondary-green.svg"
+          src="@/assets/images/icons/setting-2-secondary-green.svg"
           class="size-6"
           alt="icon"
         />

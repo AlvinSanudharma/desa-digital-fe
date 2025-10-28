@@ -1,3 +1,4 @@
+import Main from "@/layouts/Main.vue";
 import Dashboard from "@/views/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -6,8 +7,14 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "dashboard",
-      component: Dashboard,
+      component: Main,
+      children: [
+        {
+          path: "",
+          name: "dashboard",
+          component: Dashboard,
+        },
+      ],
     },
   ],
 });
