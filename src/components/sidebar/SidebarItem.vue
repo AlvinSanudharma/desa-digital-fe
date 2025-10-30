@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, defineProps } from "vue";
 import { useRoute } from "vue-router";
 
 const props = defineProps({
