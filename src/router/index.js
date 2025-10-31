@@ -65,6 +65,8 @@ router.beforeEach(async (to, from, next) => {
       } catch (error) {
         next({ name: "login" });
       }
+    } else if (from.name === "login" && to.name === "dashboard") {
+      next();
     } else {
       next({ name: "login" });
     }

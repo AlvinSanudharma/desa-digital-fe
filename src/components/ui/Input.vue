@@ -52,7 +52,7 @@ const emit = defineEmits(["update:modelValue"]);
         class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-100 peer-placeholder-shown:opacity-0 transition-all duration-300"
       />
     </div>
-    <span class="text-left text-[12px] text-red-500" v-if="errorMessage">
+    <span class="text-left text-[12px] text-red-700" v-if="errorMessage">
       {{ errorMessage[0] }}
     </span>
   </div>

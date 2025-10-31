@@ -25,7 +25,7 @@ export const useAuthStore = defineStore("auth", {
 
         Cookies.set("token", token);
 
-        this.succes = "login Successful";
+        this.success = "login Successful";
 
         router.push({ name: "dashboard" });
       } catch (error) {
@@ -50,7 +50,7 @@ export const useAuthStore = defineStore("auth", {
       this.loading = true;
 
       try {
-        const response = await axiosInstance.get("me");
+        const response = await axiosInstance.get("/me");
 
         this.user = response.data.data;
 

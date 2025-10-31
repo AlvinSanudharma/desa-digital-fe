@@ -1,20 +1,37 @@
 <script setup>
 import Input from "@/components/ui/Input.vue";
+import Button from "@/components/ui/Button.vue";
 import { ref } from "vue";
 import IconProfileSecondaryGreen from "@/assets/images/icons/user-secondary-green.svg";
 import IconProfileBlack from "@/assets/images/icons/user-black.svg";
 import IconKeySecondaryGreen from "@/assets/images/icons/key-secondary-green.svg";
 import IconKeyBlack from "@/assets/images/icons/key-black.svg";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
+
+const authStore = useAuthStore();
+const { loading, error } = storeToRefs(authStore);
+const { login } = authStore;
 
 const form = ref({
   email: null,
   password: null,
 });
+
+const handleSubmit = async () => {
+  await login(form.value);
+
+  if (error.value == "Unauthorized") {
+    form.value.password = null;
+
+    alert("Email atau password salah");
+  }
+};
 </script>
 
 <template>
   <form
-    action="kk-dashboard.html"
+    @submit.prevent="handleSubmit"
     class="flex items-center flex-1 pl-[calc(((100%-1280px)/2)+75px)]"
   >
     <div
@@ -98,25 +115,9 @@ const form = ref({
           <h2 class="font-medium leading-5 text-desa-secondary">
             Email Address
           </h2>
-          <!-- <div class="relative">
-            <input
-              placeholder="Masukan Email Kamu"
-              type="email"
-              class="peer w-full h-[56px] rounded-2xl pl-[48px] pr-4 border-[1.5px] border-desa-background font-medium leading-5 focus:ring-[1.5px] focus:ring-desa-dark-green focus:outline-none placeholder:leading-5 placeholder:text-desa-secondary placeholder:font-medium transition-all duration-300"
-            />
-            <img
-              src="assets/images/icons/user-secondary-green.svg"
-              alt="icon"
-              class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-0 peer-placeholder-shown:opacity-100 transition-all duration-300"
-            />
-            <img
-              src="assets/images/icons/user-black.svg"
-              alt="icon"
-              class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-100 peer-placeholder-shown:opacity-0 transition-all duration-300"
-            />
-          </div> -->
           <Input
             v-model="form.email"
+            :error-message="error?.email"
             :icon="IconProfileSecondaryGreen"
             :filled-icon="IconProfileBlack"
             placeholder="Masukan Email Kamu"
@@ -125,25 +126,9 @@ const form = ref({
         </div>
         <div id="Password" class="flex flex-col gap-4">
           <h2 class="font-medium leading-5 text-desa-secondary">Password</h2>
-          <!-- <div class="relative">
-            <input
-              placeholder="Ketik Password Kamu"
-              type="password"
-              class="peer w-full h-[56px] rounded-2xl pl-[48px] pr-4 border-[1.5px] border-desa-background font-medium leading-5 focus:ring-[1.5px] focus:ring-desa-dark-green focus:outline-none placeholder:leading-5 placeholder:text-desa-secondary placeholder:font-medium transition-all duration-300 tracking-[0.25rem] placeholder-shown:tracking-normal"
-            />
-            <img
-              src="@/assets/images/icons/key-secondary-green.svg"
-              alt="icon"
-              class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-0 peer-placeholder-shown:opacity-100 transition-all duration-300"
-            />
-            <img
-              src="@/assets/images/icons/key-black.svg"
-              alt="icon"
-              class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-100 peer-placeholder-shown:opacity-0 transition-all duration-300"
-            />
-          </div> -->
           <Input
             v-model="form.password"
+            :error-message="error?.password"
             :icon="IconKeySecondaryGreen"
             :filled-icon="IconKeyBlack"
             placeholder="Ketik Password Kamu"
@@ -151,12 +136,7 @@ const form = ref({
           />
         </div>
       </section>
-      <button
-        type="submit"
-        class="py-[18px] flex justify-center items-center bg-desa-dark-green rounded-2xl font-medium leading-5 text-white"
-      >
-        Masuk
-      </button>
+      <Button type="submit" label="Masuk" :loading="loading" />
     </div>
   </form>
   <section id="Banner" class="relative flex w-full max-w-[634px]">
