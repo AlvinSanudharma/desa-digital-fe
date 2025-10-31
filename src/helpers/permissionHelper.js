@@ -1,7 +1,9 @@
-// export const can = permission => {
-//     const authStore = useAuthStore()
+import { useAuthStore } from "@/stores/auth";
 
-//     const userPermissions = authStore.user?.permissions || []
+export const can = (permission) => {
+  const authStore = useAuthStore();
 
-//     return userPermissions.includes(permission)
-// }
+  const userPermissions = authStore.user?.permissions || [];
+
+  return userPermissions.includes(permission);
+};
