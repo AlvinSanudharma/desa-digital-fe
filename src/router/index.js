@@ -3,6 +3,7 @@ import Main from "@/layouts/Main.vue";
 import { useAuthStore } from "@/stores/auth";
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
+import Cookies from "js-cookie";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -42,9 +43,10 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
+  const tokenCookies = Cookies.get("token");
 
   if (to.meta.requiresAuth) {
-    if (authStore.token) {
+    if (tokenCookies) {
       try {
         if (!authStore.user) {
           await authStore.checkAuth();
@@ -65,8 +67,6 @@ router.beforeEach(async (to, from, next) => {
       } catch (error) {
         next({ name: "login" });
       }
-    } else if (from.name === "login" && to.name === "dashboard") {
-      next();
     } else {
       next({ name: "login" });
     }
