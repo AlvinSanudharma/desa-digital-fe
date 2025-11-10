@@ -43,10 +43,9 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
-  const tokenCookies = Cookies.get("token");
 
   if (to.meta.requiresAuth) {
-    if (tokenCookies) {
+    if (Cookies.get("token")) {
       try {
         if (!authStore.user) {
           await authStore.checkAuth();
