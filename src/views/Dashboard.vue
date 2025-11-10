@@ -2,9 +2,11 @@
 import { useDashboardStore } from "@/stores/dashboard";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
+import { Skeleton } from "@brayamvalero/vue3-skeleton";
+import "@brayamvalero/vue3-skeleton/dist/style.css";
 
 const dashboardStore = useDashboardStore();
-const { loading, error, dashboardData } = storeToRefs(dashboardStore);
+const { loading, dashboardData } = storeToRefs(dashboardStore);
 const { fetchDashboardData } = dashboardStore;
 
 onMounted(() => {
@@ -60,7 +62,11 @@ onMounted(() => {
           />
         </div>
         <div class="flex flex-col gap-[6px]">
-          <p class="font-semibold text-[32px] leading-10">243.000</p>
+          <p class="font-semibold text-[32px] leading-10">
+            <Skeleton :loading="loading" width="40%">
+              {{ dashboardData?.residents }}
+            </Skeleton>
+          </p>
           <div class="flex items-center gap-0.5">
             <img
               src="@/assets/images/icons/trend-up-dark-green-fill.svg"
@@ -84,7 +90,11 @@ onMounted(() => {
           />
         </div>
         <div class="flex flex-col gap-[6px]">
-          <p class="font-semibold text-[32px] leading-10">42.000</p>
+          <p class="font-semibold text-[32px] leading-10">
+            <Skeleton :loading="loading" width="40%">
+              {{ dashboardData?.developments }}
+            </Skeleton>
+          </p>
           <div class="flex items-center gap-0.5">
             <img
               src="@/assets/images/icons/trend-up-dark-green-fill.svg"
@@ -108,7 +118,11 @@ onMounted(() => {
           />
         </div>
         <div class="flex flex-col gap-[6px]">
-          <p class="font-semibold text-[32px] leading-10">9.250</p>
+          <p class="font-semibold text-[32px] leading-10">
+            <Skeleton :loading="loading" width="40%">
+              {{ dashboardData?.head_of_families }}
+            </Skeleton>
+          </p>
           <div class="flex items-center gap-0.5">
             <img
               src="@/assets/images/icons/trend-up-dark-green-fill.svg"
@@ -132,7 +146,11 @@ onMounted(() => {
           />
         </div>
         <div class="flex flex-col gap-[6px]">
-          <p class="font-semibold text-[32px] leading-10">12</p>
+          <p class="font-semibold text-[32px] leading-10">
+            <Skeleton :loading="loading" width="40%">
+              {{ dashboardData?.events }}
+            </Skeleton>
+          </p>
           <div class="flex items-center gap-0.5">
             <img
               src="@/assets/images/icons/trend-up-dark-green-fill.svg"
@@ -163,7 +181,11 @@ onMounted(() => {
           />
         </div>
         <div class="flex flex-col gap-[6px]">
-          <p class="font-semibold text-[32px] leading-10">192</p>
+          <p class="font-semibold text-[32px] leading-10">
+            <Skeleton :loading="loading" width="40%">
+              {{ dashboardData?.social_assistances }}
+            </Skeleton>
+          </p>
           <div class="flex items-center gap-0.5">
             <img
               src="@/assets/images/icons/trend-up-dark-green-fill.svg"

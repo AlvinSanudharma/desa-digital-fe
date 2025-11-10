@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@brayamvalero/vue3-skeleton": "^2.0.0",
     "axios": "^1.12.2",
     "js-cookie": "^3.0.5",
     "luxon": "^3.7.2",

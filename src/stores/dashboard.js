@@ -18,7 +18,7 @@ export const useDashboardStore = defineStore("dashboard", {
           "/dashboard/get-dashboard-data"
         );
 
-        this.success = response.data.data;
+        this.dashboardData = response.data.data;
       } catch (error) {
         this.error = handleError(error);
       } finally {
