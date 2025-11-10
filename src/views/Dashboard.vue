@@ -1,7 +1,7 @@
 <script setup>
 import { useDashboardStore } from "@/stores/dashboard";
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
+import { onMounted, useTemplateRef } from "vue";
 import { Skeleton } from "@brayamvalero/vue3-skeleton";
 import "@brayamvalero/vue3-skeleton/dist/style.css";
 import { Chart } from "chart.js/auto";
@@ -10,8 +10,10 @@ const dashboardStore = useDashboardStore();
 const { loading, dashboardData } = storeToRefs(dashboardStore);
 const { fetchDashboardData } = dashboardStore;
 
+const chartRef = useTemplateRef("myChart");
+
 const getResidentStatistic = () => {
-  const chart = document.getElementById("myChart");
+  const chart = chartRef.value?.getContext("2d");
 
   new Chart(chart, {
     type: "doughnut",
@@ -43,8 +45,9 @@ const getResidentStatistic = () => {
   });
 };
 
-onMounted(() => {
-  fetchDashboardData();
+onMounted(async () => {
+  await fetchDashboardData();
+
   getResidentStatistic();
 });
 </script>
@@ -799,7 +802,7 @@ onMounted(() => {
           <p class="font-semibold text-[32px] leading-10">243.000</p>
           <p class="font-medium text-sm text-desa-secondary">Jumlah Penduduk</p>
         </div>
-        <canvas id="myChart" class="size-[288px] mx-auto"></canvas>
+        <canvas ref="myChart" class="size-[288px] mx-auto"></canvas>
       </div>
       <div class="flex flex-col gap-4">
         <div class="flex items-center justify-between">
