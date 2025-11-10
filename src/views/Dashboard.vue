@@ -4,13 +4,48 @@ import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 import { Skeleton } from "@brayamvalero/vue3-skeleton";
 import "@brayamvalero/vue3-skeleton/dist/style.css";
+import { Chart } from "chart.js/auto";
 
 const dashboardStore = useDashboardStore();
 const { loading, dashboardData } = storeToRefs(dashboardStore);
 const { fetchDashboardData } = dashboardStore;
 
+const getResidentStatistic = () => {
+  const chart = document.getElementById("myChart");
+
+  new Chart(chart, {
+    type: "doughnut",
+    data: {
+      datasets: [
+        {
+          data: [114210, 97200, 24300, 7290],
+          backgroundColor: ["#34613A", "#8EBD55", "#FA7139", "#FBAD48"],
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          display: false,
+        },
+        y: {
+          display: false,
+        },
+      },
+      datasets: {
+        doughnut: {
+          spacing: 2,
+          borderRadius: 6,
+          cutout: "69%",
+        },
+      },
+    },
+  });
+};
+
 onMounted(() => {
   fetchDashboardData();
+  getResidentStatistic();
 });
 </script>
 
