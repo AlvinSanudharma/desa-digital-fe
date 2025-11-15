@@ -1,3 +1,12 @@
+<script setup>
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
+
+const authStore = useAuthStore();
+const { user, loading } = storeToRefs(authStore);
+const { logout } = authStore;
+</script>
+
 <template>
   <div id="Top-Bar" class="relative flex h-[116px] shrink-0">
     <div
@@ -57,11 +66,19 @@
           />
         </div>
         <div class="flex flex-col gap-[6px] w-[120px] shrink-0">
-          <p class="font-semibold leading-5 w-[120px] truncate">Bimore W</p>
-          <p class="font-medium text-sm text-desa-secondary">Kepala Desa</p>
+          <p class="font-semibold leading-5 w-[120px] truncate">
+            {{ user?.name }}
+          </p>
+          <p class="font-medium text-sm text-desa-secondary">
+            {{ user?.role }}
+          </p>
         </div>
-        <a href="index.html" class="flex size-6 shrink-0">
+        <a @click="logout" class="flex size-6 shrink-0">
+          <p v-if="loading" class="font-semibold leading-5 w-[120px] truncate">
+            Loading...
+          </p>
           <img
+            v-else
             src="@/assets/images/icons/logout-red.svg"
             class="size-6"
             alt="logout"
