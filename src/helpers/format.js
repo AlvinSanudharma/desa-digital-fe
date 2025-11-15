@@ -45,3 +45,11 @@ export function formatToClientTimezone(date) {
 export function ucfirst(string) {
   return string ? string.chartAt(0).toUpperCase() + string.slice(1) : "";
 }
+
+export function formatRole(role) {
+  if (!role) return;
+
+  const arrRole = role.split("-");
+
+  return arrRole.map((el) => el[0].toUpperCase() + el.slice(1)).join(" ");
+}

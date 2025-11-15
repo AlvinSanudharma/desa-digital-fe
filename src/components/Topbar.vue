@@ -1,10 +1,17 @@
 <script setup>
+import { formatRole } from "@/helpers/format";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 
 const authStore = useAuthStore();
 const { user, loading } = storeToRefs(authStore);
 const { logout } = authStore;
+
+const handleLogout = async () => {
+  if (!window.confirm("Apakah Anda yakin ingin logout?")) return;
+
+  await logout();
+};
 </script>
 
 <template>
@@ -70,15 +77,12 @@ const { logout } = authStore;
             {{ user?.name }}
           </p>
           <p class="font-medium text-sm text-desa-secondary">
-            {{ user?.role }}
+            {{ formatRole(user?.role) }}
           </p>
         </div>
-        <a @click="logout" class="flex size-6 shrink-0">
-          <p v-if="loading" class="font-semibold leading-5 w-[120px] truncate">
-            Loading...
-          </p>
+        <p v-if="loading" class="font-semibold leading-5">Loading...</p>
+        <a v-else @click="handleLogout" class="flex size-6 shrink-0">
           <img
-            v-else
             src="@/assets/images/icons/logout-red.svg"
             class="size-6"
             alt="logout"
