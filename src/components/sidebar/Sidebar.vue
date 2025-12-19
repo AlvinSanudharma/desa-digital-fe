@@ -14,7 +14,7 @@ const sidebarItems = [
   },
   {
     label: "Kepala Rumah",
-    path: "#",
+    path: "/head-of-family",
     iconActive: iconCrown,
     iconInActive: iconCrownInActive,
   },

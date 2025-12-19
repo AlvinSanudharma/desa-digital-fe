@@ -2,6 +2,7 @@ import Auth from "@/layouts/Auth.vue";
 import Main from "@/layouts/Main.vue";
 import { useAuthStore } from "@/stores/auth";
 import Dashboard from "@/views/Dashboard.vue";
+import HeadOfFamilies from "@/views/head-of-family/HeadOfFamilies.vue";
 import Login from "@/views/Login.vue";
 import Cookies from "js-cookie";
 import { createRouter, createWebHistory } from "vue-router";
@@ -20,6 +21,15 @@ const router = createRouter({
           meta: {
             requiresAuth: true,
             permissions: "dashboard-menu",
+          },
+        },
+        {
+          path: "head-of-family",
+          name: "head-of-family",
+          component: HeadOfFamilies,
+          meta: {
+            requiresAuth: true,
+            permissions: "head-of-family-list",
           },
         },
       ],
