@@ -1,4 +1,5 @@
 <script setup>
+import CardListSkeleton from "@/components/head-of-family/CardListSkeleton.vue";
 import { useHeadOfFamilyStore } from "@/stores/headOfFamily";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
@@ -102,5 +103,6 @@ onMounted(fetchData);
         </button>
       </div>
     </form>
+    <CardListSkeleton v-for="_ in new Array(6).fill({})" />
   </section>
 </template>
