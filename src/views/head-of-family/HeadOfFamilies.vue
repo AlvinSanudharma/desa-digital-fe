@@ -1,11 +1,13 @@
 <script setup>
+import CardList from "@/components/head-of-family/CardList.vue";
 import CardListSkeleton from "@/components/head-of-family/CardListSkeleton.vue";
 import { useHeadOfFamilyStore } from "@/stores/headOfFamily";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 
 const headOfFamilyStore = useHeadOfFamilyStore();
-const { meta, loading, error, success } = storeToRefs(headOfFamilyStore);
+const { meta, loading, error, success, headOfFamilies } =
+  storeToRefs(headOfFamilyStore);
 const { fetchHeadOfFamiliesPaginated } = headOfFamilyStore;
 
 const serverOptions = ref({
@@ -103,6 +105,12 @@ onMounted(fetchData);
         </button>
       </div>
     </form>
-    <CardListSkeleton v-for="_ in new Array(6).fill({})" />
+    <CardListSkeleton v-if="loading" v-for="_ in new Array(6).fill({})" />
+    <CardList
+      v-else
+      v-for="headOfFamily in headOfFamilies"
+      :item="headOfFamily"
+      :key="headOfFamily.id"
+    />
   </section>
 </template>
