@@ -33,63 +33,30 @@ defineProps({
           />
         </a>
       </li>
-      <li class="group active">
+      <li
+        class="group"
+        v-for="page in meta.last_page"
+        :key="page"
+        :class="{ active: page === meta.current_page }"
+      >
         <a
+          @click="serverOptions.page = page"
           class="flex size-11 shrink-0 items-center justify-center rounded-full bg-desa-foreshadow group-hover:bg-desa-dark-green group-[.active]:bg-desa-dark-green transition-setup"
         >
           <span
             class="text-desa-dark-green font-semibold group-[.active]:text-desa-foreshadow group-hover:text-desa-foreshadow transition-setup"
           >
-            1
+            {{ page }}
           </span>
         </a>
       </li>
+
       <li class="group">
         <a
-          class="flex size-11 shrink-0 items-center justify-center rounded-full bg-desa-foreshadow group-hover:bg-desa-dark-green group-[.active]:bg-desa-dark-green transition-setup"
-        >
-          <span
-            class="text-desa-dark-green font-semibold group-[.active]:text-desa-foreshadow group-hover:text-desa-foreshadow transition-setup"
-          >
-            2
-          </span>
-        </a>
-      </li>
-      <li class="group">
-        <a
-          class="flex size-11 shrink-0 items-center justify-center rounded-full bg-desa-foreshadow group-hover:bg-desa-dark-green group-[.active]:bg-desa-dark-green transition-setup"
-        >
-          <span
-            class="text-desa-dark-green font-semibold group-[.active]:text-desa-foreshadow group-hover:text-desa-foreshadow transition-setup"
-          >
-            3
-          </span>
-        </a>
-      </li>
-      <li class="group">
-        <a
-          class="flex size-11 shrink-0 items-center justify-center rounded-full bg-desa-foreshadow group-hover:bg-desa-dark-green group-[.active]:bg-desa-dark-green transition-setup"
-        >
-          <span
-            class="text-desa-dark-green font-semibold group-[.active]:text-desa-foreshadow group-hover:text-desa-foreshadow transition-setup"
-          >
-            4
-          </span>
-        </a>
-      </li>
-      <li class="group">
-        <a
-          class="flex size-11 shrink-0 items-center justify-center rounded-full bg-desa-foreshadow group-hover:bg-desa-dark-green group-[.active]:bg-desa-dark-green transition-setup"
-        >
-          <span
-            class="text-desa-dark-green font-semibold group-[.active]:text-desa-foreshadow group-hover:text-desa-foreshadow transition-setup"
-          >
-            5
-          </span>
-        </a>
-      </li>
-      <li class="group">
-        <button
+          @click="serverOptions.page = meta.current_page + 1"
+          :class="{
+            'cursor-not-allowed': meta.current_page === meta.last_page,
+          }"
           type="button"
           class="group/arrow flex size-11 shrink-0 items-center justify-center rounded-full bg-desa-foreshadow disabled:!bg-desa-foreshadow group-hover:bg-desa-dark-green transition-setup"
         >
@@ -108,7 +75,7 @@ defineProps({
             class="hidden size-6 shrink-0 rotate-180 group-disabled/arrow:!flex"
             alt="icon"
           />
-        </button>
+        </a>
       </li>
     </ul>
   </nav>

@@ -1,9 +1,11 @@
 <script setup>
 import CardList from "@/components/head-of-family/CardList.vue";
 import CardListSkeleton from "@/components/head-of-family/CardListSkeleton.vue";
+import Pagination from "@/components/ui/Pagination.vue";
 import { useHeadOfFamilyStore } from "@/stores/headOfFamily";
+import { debounce } from "lodash";
 import { storeToRefs } from "pinia";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 const headOfFamilyStore = useHeadOfFamilyStore();
 const { meta, loading, error, success, headOfFamilies } =
@@ -26,7 +28,25 @@ const fetchData = async () => {
   });
 };
 
+const debounceFetchData = debounce(fetchData, 500);
+
 onMounted(fetchData);
+
+watch(
+  serverOptions,
+  () => {
+    fetchData();
+  },
+  { deep: true }
+);
+
+watch(
+  filters,
+  () => {
+    debounceFetchData();
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -49,6 +69,7 @@ onMounted(fetchData);
       <div class="flex flex-col gap-3 w-[370px] shrink-0">
         <label class="relative group peer w-full valid">
           <input
+            v-model="filters.search"
             type="text"
             placeholder="Cari nama Kepala Rumah atau NIK"
             class="appearance-none outline-none w-full h-14 rounded-2xl ring-[1.5px] ring-desa-background focus:ring-desa-black py-4 pl-12 pr-6 gap-2 font-medium placeholder:text-desa-secondary transition-all duration-300"
@@ -112,5 +133,6 @@ onMounted(fetchData);
       :item="headOfFamily"
       :key="headOfFamily.id"
     />
+    <Pagination :meta="meta" :server-options="serverOptions" />
   </section>
 </template>

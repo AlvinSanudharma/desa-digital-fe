@@ -40,7 +40,7 @@ export const useHeadOfFamilyStore = defineStore("head-of-family", {
         );
 
         this.headOfFamilies = response.data.data.data;
-        this.meta = response.data.data.data.meta;
+        this.meta = response.data.data.meta;
       } catch (error) {
         this.error = handleError(error);
       } finally {
