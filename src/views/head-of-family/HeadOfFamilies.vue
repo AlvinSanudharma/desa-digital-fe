@@ -97,6 +97,7 @@ watch(
             <select
               name=""
               id=""
+              v-model="serverOptions.row_per_page"
               class="appearance-none outline-none w-full h-14 rounded-2xl ring-[1.5px] ring-desa-background focus:ring-desa-black py-4 px-6 pr-[52px] gap-2 font-medium placeholder:text-desa-secondary transition-all duration-300"
             >
               <option value="5" selected>5 Entries</option>
