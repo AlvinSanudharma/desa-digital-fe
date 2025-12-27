@@ -16,7 +16,9 @@ defineProps({
         class="flex size-16 shrink-0 rounded-full overflow-hidden bg-desa-foreshadow"
       >
         <img
-          :src="item.profile_picture"
+          v-lazy="{
+            src: 'item.profile_picture',
+          }"
           class="w-full h-full object-cover"
           alt="photo"
         />

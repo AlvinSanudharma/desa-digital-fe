@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import VueLazyLoad from "vue3-lazyload";
 
 import "./index.css";
 
@@ -13,5 +14,9 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(router);
 app.use(Skeleton);
+app.use(VueLazyLoad, {
+  loading: "./images/image-placeholder.png",
+  error: "./images/image-placeholder.png",
+});
 
 app.mount("#app");
