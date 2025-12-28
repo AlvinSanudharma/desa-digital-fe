@@ -4,6 +4,9 @@ import iconChartActive from "@/assets/images/icons/chart-square-dark-green.svg";
 import iconChartInActive from "@/assets/images/icons/chart-square-secondary-green.svg";
 import iconCrown from "@/assets/images/icons/crown-dark-green.svg";
 import iconCrownInActive from "@/assets/images/icons/crown-secondary-green.svg";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 const sidebarItems = [
   {
@@ -11,14 +14,16 @@ const sidebarItems = [
     path: "/",
     iconActive: iconChartActive,
     iconInActive: iconChartInActive,
+    permission: "dashboard-menu",
   },
   {
     label: "Kepala Rumah",
     path: "/head-of-family",
     iconActive: iconCrown,
     iconInActive: iconCrownInActive,
+    permission: "head-of-family-list",
   },
-];
+].filter((el) => authStore.user.permissions.includes(el.permission));
 </script>
 
 <template>
