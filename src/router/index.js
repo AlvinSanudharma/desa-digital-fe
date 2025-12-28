@@ -2,6 +2,7 @@ import Auth from "@/layouts/Auth.vue";
 import Main from "@/layouts/Main.vue";
 import { useAuthStore } from "@/stores/auth";
 import Dashboard from "@/views/Dashboard.vue";
+import Error403 from "@/views/errors/Error403.vue";
 import HeadOfFamilies from "@/views/head-of-family/HeadOfFamilies.vue";
 import Login from "@/views/Login.vue";
 import Cookies from "js-cookie";
@@ -33,6 +34,11 @@ const router = createRouter({
           },
         },
       ],
+    },
+    {
+      path: "/forbidded",
+      name: "Error403",
+      component: Error403,
     },
     {
       path: "/login",
@@ -67,7 +73,7 @@ router.beforeEach(async (to, from, next) => {
           to.meta.permissions &&
           !userPermissions.includes(to.meta.permissions)
         ) {
-          next({ name: "Error 403" });
+          next({ name: "Error403" });
 
           return;
         }

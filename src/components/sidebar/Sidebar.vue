@@ -14,16 +14,20 @@ const sidebarItems = [
     path: "/",
     iconActive: iconChartActive,
     iconInActive: iconChartInActive,
-    permission: "dashboard-menu",
+    permissions: ["dashboard-menu"],
   },
   {
     label: "Kepala Rumah",
     path: "/head-of-family",
     iconActive: iconCrown,
     iconInActive: iconCrownInActive,
-    permission: "head-of-family-list",
+    permissions: ["head-of-family-list"],
   },
-].filter((el) => authStore.user.permissions.includes(el.permission));
+].filter((item) =>
+  item.permissions.every((permission) =>
+    authStore.user.permissions.includes(permission)
+  )
+);
 </script>
 
 <template>
